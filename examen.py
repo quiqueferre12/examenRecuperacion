@@ -21,12 +21,29 @@ def mediana(dic):
         return media
 
 def procesar(nombre,curso):
+    lista=[]
+    listafiltrada=[]
+    cont=0
     with open(nombre + '.csv', 'r') as file:
             reader = csv.reader(file)
             
             primera_fila = next(reader)  # Lee la primera fila
             for fila in reader:
-                print(str(fila[0]))
+                lista.append(fila)
+            for casilla in lista:
+                
+                if int(casilla[len(casilla)-1]) == curso:
+                    
+                    listafiltrada.append(casilla)
+                    cont=cont+1
+                
+                    
+    if cont!=0:
+        return listafiltrada
+    else:
+        raise ValueError("No hay ningún alumno en el curso: "+str(curso))
+                       
+                
                 
     
         
@@ -36,4 +53,5 @@ if __name__ == '__main__':
     res=mediana(diccionario)
     print("valor mediana a devolver:"+str(res))
 
-    procesar("fichero",3)
+    listafiltrada=procesar("fichero",3)
+    print("La lista de alumnos es: "+str(listafiltrada))
